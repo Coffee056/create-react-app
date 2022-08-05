@@ -1,23 +1,31 @@
 import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.scss';
+import {useState} from 'react'
 
 function App() {
+  const [block, setBlock] = useState([]);
+  const addBlock = () => {
+    setBlock([...block, block.length])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className={styles.App}>
+      <header className={styles.header}>
+        Header
       </header>
+      <div className={styles.content}>
+      <img src={logo} alt="logo" className={styles.logo}></img>
+        新增内容：
+        <button onClick={addBlock}>ADD BLOCK</button>
+        {block.map((value) => {
+          return (
+            <div className={styles.newContent} key={value}>
+               {value}
+           </div> 
+          )
+        })}
+      </div>
+      <footer className={styles.footer}>Footer</footer>
     </div>
   );
 }
